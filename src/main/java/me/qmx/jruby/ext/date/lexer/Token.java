@@ -1,6 +1,6 @@
 package me.qmx.jruby.ext.date.lexer;
 
-public class Token {
+public abstract class Token {
 
     private final String value;
 
@@ -10,7 +10,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" +
+        return getClass().getSimpleName() + "{" +
                 "value='" + value + '\'' +
                 '}';
     }

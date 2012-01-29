@@ -1,5 +1,6 @@
 package me.qmx.jruby.ext.date.lexer;
 
+import me.qmx.jruby.ext.date.lexer.tokens.*;
 %%
 %class DateLexer
 %unicode
@@ -7,6 +8,9 @@ package me.qmx.jruby.ext.date.lexer;
 %column
 %type Token
 %state STRING
+
+FMT_START = %
+YEAR_WITH_CENTURY = Y
 
 NO_PAD_NUM = -
 USE_SPACES = _
@@ -17,6 +21,14 @@ USE_COLONS = :
 
 FLAGS = (NO_PAD_NUM | USE_SPACES | USE_ZEROS | UPCASE | CHANGE_CASE | USE_COLONS)*
 
+
+
+FORMAT_STRING = %+DIRECTIVE
+
 %%
 
-{FLAGS} { return new Token(yytext()); }
+{FMT_START} { return new Begin(yytext()); }
+{YEAR_WITH_CENTURY} { return new YearWithCentury(yytext()); }
+
+
+
