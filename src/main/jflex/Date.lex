@@ -6,9 +6,17 @@ package me.qmx.jruby.ext.date.lexer;
 %line
 %column
 %type Token
+%state STRING
 
-DecIntegerLiteral = 0 | [1-9][0-9]*
+NO_PAD_NUM = -
+USE_SPACES = _
+USE_ZEROS = 0
+UPCASE = \^
+CHANGE_CASE = #
+USE_COLONS = :
+
+FLAGS = (NO_PAD_NUM | USE_SPACES | USE_ZEROS | UPCASE | CHANGE_CASE | USE_COLONS)*
 
 %%
 
-[:digit:]+ {  }
+{FLAGS} { return new Token(yytext()); }
