@@ -2,7 +2,8 @@ package me.qmx.jruby.ext.date.lexer;
 
 import me.qmx.jruby.ext.date.lexer.tokens.*;
 %%
-%class DateLexer
+%public
+%class DateFormatLexer
 %unicode
 %line
 %column
